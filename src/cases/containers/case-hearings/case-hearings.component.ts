@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoadingService } from '@hmcts/ccd-case-ui-toolkit';
 import { select, Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { combineLatest, Observable, of, Subscription } from 'rxjs';
@@ -48,6 +49,7 @@ export class CaseHearingsComponent implements OnInit, OnDestroy {
   public caseId: string = '';
   public serverError: { id: string, message: string } = null;
   public isOgdRole: boolean;
+  public showSpinner$ : Observable<boolean>;
   public hearingStageOptions: LovRefDataModel[];
   public hearingValuesSubscription: Subscription;
   public refDataSubscription: Subscription;
@@ -57,7 +59,8 @@ export class CaseHearingsComponent implements OnInit, OnDestroy {
               private readonly activatedRoute: ActivatedRoute,
               private readonly roleCategoryMappingService: RoleCategoryMappingService,
               private readonly router: Router,
-              private readonly lovRefDataService: LovRefDataService) {
+              private readonly lovRefDataService: LovRefDataService,
+              private readonly loadingService: LoadingService) {
     this.caseId = this.activatedRoute.snapshot.params.cid;
     this.userRoles$ = this.appStore.pipe(select(fromAppStore.getUserDetails)).pipe(
       map(userDetails => userDetails.userInfo.roles)
@@ -73,6 +76,8 @@ export class CaseHearingsComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
+    this.showSpinner$ = this.loadingService.isLoading as any;
+    const loadingToken = this.loadingService.register();
     this.hearingStore.dispatch(new fromHearingStore.LoadHearingValues(this.caseId));
     this.hearingValuesSubscription = this.hearingStore.pipe(select(fromHearingStore.getHearingValuesModel)).subscribe(serviceHearingValuesModel => {
       if (serviceHearingValuesModel && serviceHearingValuesModel.hmctsServiceID) {
@@ -94,6 +99,9 @@ export class CaseHearingsComponent implements OnInit, OnDestroy {
         // Reset the error context if there is no error on subsequent requests
         this.serverError = null;
       }
+      this.loadingService.unregister(loadingToken);
+    }, error => {
+      this.loadingService.unregister(loadingToken);
     });
     this.upcomingHearings$ = this.getHearingListByStatus(EXUISectionStatusEnum.UPCOMING);
     this.pastAndCancelledHearings$ = this.getHearingListByStatus(EXUISectionStatusEnum.PAST_OR_CANCELLED);

@@ -5,6 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 import * as _ from 'lodash';
+import { LoadingService } from '@hmcts/ccd-case-ui-toolkit';
 import { Observable, of } from 'rxjs';
 import { hearingActualsMainModel, hearingStageRefData, initialState, partyChannelsRefData, partySubChannelsRefData } from '../../../hearing.test.data';
 import { ActualHearingDayModel } from '../../../models/hearingActualsMainModel';
@@ -494,6 +495,7 @@ describe('HearingActualsAddEditSummaryComponent', () => {
         ]
       )],
       providers: [
+        LoadingService,
         provideMockStore({ initialState }),
         { provide: HearingsService, useValue: hearingsService },
         {
