@@ -73,7 +73,7 @@ export class AllWorkTaskComponent extends TaskListWrapperComponent {
     ).pipe(map(jurisdictions => {
       this.supportedJurisdictions = jurisdictions[1];
       const result = jurisdictions[0].includes(null) ? jurisdictions[1] : jurisdictions[0];
-      return [...new Set(result)]
+      return [...new Set(result)];
     }));
   }
 
