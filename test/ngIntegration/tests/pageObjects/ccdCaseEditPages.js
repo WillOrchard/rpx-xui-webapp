@@ -20,7 +20,7 @@ class CaseEdit {
     checkYourAnswersSummaryRows = $$('.check-your-answers .form-table tr');
 
     validationAlertSummaryContainer = $('.govuk-error-summary[role="alert"]');
-    callbackErrorSummaryContainer = $('.error-summary[role="status"]');
+    callbackErrorSummaryContainer = $('.error-summary');
 
 
 
