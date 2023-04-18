@@ -127,11 +127,11 @@ describe('TasksContainerComponent', () => {
       ],
       providers: [
         LoadingService,
-        {provide: AlertService, useValue: mockAlertService},
-        {provide: WorkAllocationCaseService, useValue: mockWACaseService},
-        {provide: CaseworkerDataService, useValue: mockCaseworkerService},
-        {provide: AllocateRoleService, useValue: mockRoleService},
-        {provide: FeatureToggleService, useValue: mockFeatureToggleService},
+        { provide: AlertService, useValue: mockAlertService },
+        { provide: WorkAllocationCaseService, useValue: mockWACaseService },
+        { provide: CaseworkerDataService, useValue: mockCaseworkerService },
+        { provide: AllocateRoleService, useValue: mockRoleService },
+        { provide: FeatureToggleService, useValue: mockFeatureToggleService },
         {
           provide: ActivatedRoute,
           useValue: {

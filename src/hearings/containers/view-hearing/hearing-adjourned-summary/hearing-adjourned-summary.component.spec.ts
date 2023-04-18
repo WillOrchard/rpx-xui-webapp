@@ -22,7 +22,7 @@ describe('HearingAdjournedSummaryComponent', () => {
       declarations: [HearingAdjournedSummaryComponent],
       providers: [
         LoadingService,
-        provideMockStore({ initialState }),
+        provideMockStore({ initialState })
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })

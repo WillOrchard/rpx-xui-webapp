@@ -34,7 +34,7 @@ export class TasksContainerComponent implements OnInit {
               private readonly rolesService: AllocateRoleService,
               private readonly featureToggleService: FeatureToggleService,
               private readonly loadingService: LoadingService) {
-                this.isUpdatedTaskPermissions$ = this.featureToggleService.isEnabled(AppConstants.FEATURE_NAMES.updatedTaskPermissionsFeature);
+    this.isUpdatedTaskPermissions$ = this.featureToggleService.isEnabled(AppConstants.FEATURE_NAMES.updatedTaskPermissionsFeature);
   }
 
   public ngOnInit(): void {
@@ -61,7 +61,7 @@ export class TasksContainerComponent implements OnInit {
       })).subscribe((tasks) => {
         this.tasks = tasks;
         this.loadingService.unregister(loadingToken);
-      }, error => {
+      }, () => {
         this.loadingService.unregister(loadingToken);
       });
     this.caseDetails = this.route.snapshot.data.case as CaseView;

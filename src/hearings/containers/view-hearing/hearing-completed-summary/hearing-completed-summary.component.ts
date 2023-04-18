@@ -30,7 +30,7 @@ export class HearingCompletedSummaryComponent implements OnInit, OnDestroy {
     this.sub = this.hearingState$.subscribe((state) => {
       this.hearingActualsMainModel = state.hearingActuals.hearingActualsMainModel;
       this.loadingService.unregister(loadingToken);
-    }, error => {
+    }, () => {
       this.loadingService.unregister(loadingToken);
     });
   }

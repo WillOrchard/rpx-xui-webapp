@@ -29,7 +29,7 @@ export class HearingViewActualSummaryComponent implements OnInit, OnDestroy {
       .subscribe((state: HearingActualsStateData) => {
         this.hearingActualsMainModel = state.hearingActualsMainModel;
         this.loadingService.unregister(loadingToken);
-      }, error => {
+      }, () => {
         this.loadingService.unregister(loadingToken);
       });
   }
