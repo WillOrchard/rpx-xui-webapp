@@ -36,12 +36,12 @@ export const initProxy = (app: Express) => {
 
   applyProxy(app, {
     filter: [
-      '!/data/internal/searchCases',
+      '!/data/internal/searchCases'
     ],
     rewrite: false,
     source: [
       '/print',
-      '/data',
+      '/data'
     ],
     target: getConfigValue(proxiedReferences.SERVICES_CCD_COMPONENT_API_PATH),
   });
@@ -95,7 +95,7 @@ export const initProxy = (app: Express) => {
     rewrite: false,
     source: [
       '/api/markups',
-      '/api/redaction',
+      '/api/redaction'
     ],
     target: getConfigValue(proxiedReferences.SERVICES_MARKUP_API_URL),
   });
