@@ -8,7 +8,6 @@ import { Store } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 import { of } from 'rxjs';
 import { AppConfig } from '../../../app/services/ccd-config/ccd-case.config';
-import * as converts from '../../converters/case-converter';
 import { CaseListComponent } from './case-list.component';
 
 describe('CaseListComponent', () => {
@@ -320,7 +319,6 @@ describe('CaseListComponent', () => {
 
   describe('onToggleHandler()', () => {
     it('should update the components showFilter property, on return of toggle subscription.', async () => {
-
       const showFilter = true;
       component.onToggleHandler(showFilter);
 

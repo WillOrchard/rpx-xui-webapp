@@ -8,14 +8,13 @@ import { AppConstants } from '../../app/app.constants';
 
 @Injectable()
 export class ActivityResolver implements Resolve<boolean> {
-
   constructor(
     private readonly activityService: ActivityService,
     private readonly featureToggleService: FeatureToggleService
   ) {
     this.featureToggleService.getValue<string>(AppConstants.ACTIVITY_TRACKER_MODE, undefined)
-      .pipe(filter(mode => !!mode))
-      .subscribe(mode => {
+      .pipe(filter((mode) => !!mode))
+      .subscribe((mode) => {
         this.activityService.mode = ActivityService.MODES[mode] || ActivityService.MODES.off;
         if (this.activityService.mode !== ActivityService.MODES.off) {
           this.activityService.verifyUserIsAuthorized();
