@@ -118,7 +118,7 @@ export const initProxy = (app: Express) => {
     rewrite: true,
     rewriteUrl: '/notifications',
     source: '/api/notification',
-    target: getConfigValue(SERVICES_NOTIFICATIONS_API_URL),
+    target: getConfigValue(proxiedReferences.SERVICES_NOTIFICATIONS_API_URL),
   });
 
   applyProxy(app, {
