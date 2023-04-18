@@ -12,7 +12,6 @@ import * as fromCaseList from '../../store/reducers';
   styleUrls: ['./case-share-confirm.component.scss']
 })
 export class CaseShareConfirmComponent implements OnInit {
-
   public shareCases$: Observable<SharedCase[]>;
   public shareCases: SharedCase[];
   public showSpinner$ : Observable<boolean>;
@@ -25,12 +24,11 @@ export class CaseShareConfirmComponent implements OnInit {
     this.showSpinner$ = this.loadingService.isLoading as any;
     const loadingToken = this.loadingService.register();
     this.shareCases$ = this.store.pipe(select(fromCasesFeature.getShareCaseListState));
-    this.shareCases$.subscribe(shareCases => {
+    this.shareCases$.subscribe((shareCases) => {
       this.shareCases = shareCases;
       this.loadingService.unregister(loadingToken);
     }, error => {
       this.loadingService.unregister(loadingToken);
     });
   }
-
 }

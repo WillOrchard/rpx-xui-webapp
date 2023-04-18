@@ -9,7 +9,6 @@ import * as fromHearingStore from '../../../store';
   templateUrl: './hearing-final-confirmation.component.html'
 })
 export class HearingFinalConfirmationComponent implements OnInit, OnDestroy {
-
   public heading: string;
   public headingDescription: string;
   public subheading: string;
@@ -20,14 +19,13 @@ export class HearingFinalConfirmationComponent implements OnInit, OnDestroy {
   public showSpinner$: Observable<boolean>;
 
   constructor(protected readonly hearingStore: Store<fromHearingStore.State>,
-    private readonly loadingService: LoadingService) {
-  }
+    private readonly loadingService: LoadingService) {}
 
   public ngOnInit(): void {
     this.showSpinner$ = this.loadingService.isLoading as any;
     const loadingToken = this.loadingService.register();
     this.sub = this.hearingStore.pipe(select(fromHearingStore.getHearingList)).subscribe(
-      hearingList => {
+      (hearingList) => {
         this.caseId = hearingList.hearingListMainModel ? hearingList.hearingListMainModel.caseRef : '';
         this.heading = 'Hearing request submitted';
         this.headingDescription = 'Your hearing request will now be processed';

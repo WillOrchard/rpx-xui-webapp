@@ -8,7 +8,7 @@ import * as fromHearingStore from '../../../store';
 
 @Component({
   selector: 'exui-hearing-completed-summary',
-  templateUrl: './hearing-completed-summary.component.html',
+  templateUrl: './hearing-completed-summary.component.html'
 })
 export class HearingCompletedSummaryComponent implements OnInit, OnDestroy {
   public hearingState$: Observable<fromHearingStore.State>;
@@ -17,18 +17,17 @@ export class HearingCompletedSummaryComponent implements OnInit, OnDestroy {
   public showSpinner$: Observable<boolean>;
 
   constructor(private readonly hearingStore: Store<fromHearingStore.State>,
-    private readonly loadingService: LoadingService) {
-  }
+    private readonly loadingService: LoadingService) {}
 
   public ngOnInit(): void {
     this.showSpinner$ = this.loadingService.isLoading as any;
     const loadingToken = this.loadingService.register();
     this.hearingState$ = this.hearingStore.select(fromHearingStore.getHearingsFeatureState)
       .pipe(
-        filter(state => !!state.hearingActuals.hearingActualsMainModel),
+        filter((state) => !!state.hearingActuals.hearingActualsMainModel),
       );
 
-    this.sub = this.hearingState$.subscribe(state => {
+    this.sub = this.hearingState$.subscribe((state) => {
       this.hearingActualsMainModel = state.hearingActuals.hearingActualsMainModel;
       this.loadingService.unregister(loadingToken);
     }, error => {

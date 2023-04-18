@@ -44,19 +44,18 @@ export class TaskManagerFilterComponent implements OnInit, OnDestroy {
         {
           name: 'selectPerson',
           value: ['All']
-        },
+        }
       ]
     }
   };
 
   constructor(private readonly filterService: FilterService,
-              private readonly appStore: Store<fromAppStore.State>) {
-  }
+              private readonly appStore: Store<fromAppStore.State>) {}
 
   private static initServiceFilter(jurisdictions: string[]): FilterFieldConfig {
     return {
       name: 'service',
-      options: jurisdictions.map(service => ({ key: service, label: service })),
+      options: jurisdictions.map((service) => ({ key: service, label: service })),
       minSelected: 1,
       maxSelected: 1,
       minSelectedError: 'You must select a service',
@@ -216,7 +215,7 @@ export class TaskManagerFilterComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.appStoreSub = this.appStore.pipe(select(fromAppStore.getUserDetails)).subscribe(
-      userDetails => {
+      (userDetails) => {
         this.userRole = userDetails.userInfo && userDetails.userInfo.roles ? AppUtils.getUserRole(userDetails.userInfo.roles) : null;
         this.roleType = AppUtils.convertDomainToLabel(this.userRole);
         this.fieldsConfig.cancelSetting.fields.push({

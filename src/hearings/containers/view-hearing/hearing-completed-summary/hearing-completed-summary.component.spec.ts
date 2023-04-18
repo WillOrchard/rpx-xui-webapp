@@ -11,7 +11,9 @@ import { HearingCompletedSummaryComponent } from './hearing-completed-summary.co
 describe('HearingCompletedSummaryComponent', () => {
   let component: HearingCompletedSummaryComponent;
   let fixture: ComponentFixture<HearingCompletedSummaryComponent>;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let router: Router;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let mockStore: any;
 
   beforeEach(() => {
@@ -21,7 +23,7 @@ describe('HearingCompletedSummaryComponent', () => {
       providers: [
         provideMockStore({ initialState }), LoadingService
       ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
       .compileComponents();
     mockStore = TestBed.inject(Store);

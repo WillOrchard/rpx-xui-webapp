@@ -32,7 +32,7 @@ export class CancelHearingComponent implements OnInit {
     protected readonly hearingStore: Store<fromHearingStore.State>,
     protected readonly hearingsService: HearingsService,
     private readonly loadingService: LoadingService) {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       this.hearingId = params.hearingId;
     });
   }
@@ -45,10 +45,10 @@ export class CancelHearingComponent implements OnInit {
     this.showSpinner$ = this.loadingService.isLoading as any;
     const loadingToken = this.loadingService.register();
     this.hearingStore.pipe(select(fromHearingStore.getHearingList)).subscribe(
-      hearingList => {
+      (hearingList) => {
         this.caseId = hearingList.hearingListMainModel ? hearingList.hearingListMainModel.caseRef : '';
         if (hearingList.hearingListMainModel) {
-          const caseHearings = hearingList.hearingListMainModel.caseHearings.filter(caseHearing => caseHearing.hearingID === this.hearingId);
+          const caseHearings = hearingList.hearingListMainModel.caseHearings.filter((caseHearing) => caseHearing.hearingID === this.hearingId);
           this.caseHearing = caseHearings.length ? caseHearings[0] : undefined;
         }
         this.loadingService.unregister(loadingToken);
@@ -60,7 +60,7 @@ export class CancelHearingComponent implements OnInit {
   }
 
   public get getReasonsTypeFormArray(): FormArray {
-    return this.formBuilder.array(this.hearingCancelOptions.map(val => this.formBuilder.group({
+    return this.formBuilder.array(this.hearingCancelOptions.map((val) => this.formBuilder.group({
       key: [val.key],
       value_en: [val.value_en],
       value_cy: [val.value_cy],
@@ -74,17 +74,17 @@ export class CancelHearingComponent implements OnInit {
 
   public initForm(): void {
     this.hearingCancelForm = this.formBuilder.group({
-      reasons: this.getReasonsTypeFormArray,
+      reasons: this.getReasonsTypeFormArray
     });
   }
 
   public isFormValid(): boolean {
     this.selectionValid = true;
     const isReasons = (this.hearingCancelForm.controls.reasons as FormArray).controls
-      .filter(reason => reason.value.selected === true).length > 0;
+      .filter((reason) => reason.value.selected === true).length > 0;
     if (!isReasons) {
       this.validationErrors = [{
-        id: `hearing-option-container`, message: CancelHearingMessages.NOT_SELECTED_A_REASON
+        id: 'hearing-option-container', message: CancelHearingMessages.NOT_SELECTED_A_REASON
       }];
       this.selectionValid = false;
     }
@@ -95,11 +95,11 @@ export class CancelHearingComponent implements OnInit {
     const cancellationErrorMessage = 'There was a system error and your request could not be processed. Please try again.';
     if (this.isFormValid()) {
       this.hearingsService.cancelHearingRequest(this.hearingId, this.getChosenReasons()).subscribe(
-        value => {
+        () => {
           this.validationErrors = null;
           return this.router.navigate(['cases', 'case-details', this.caseId, 'hearings']);
         },
-        err => {
+        () => {
           this.validationErrors = [{ id: 'cancel-request-error', message: cancellationErrorMessage }];
         }
       );
@@ -109,8 +109,8 @@ export class CancelHearingComponent implements OnInit {
   public getChosenReasons(): LovRefDataModel[] {
     const mappedReason: LovRefDataModel[] = [];
     const reasonChosen = (this.hearingCancelForm.controls.reasons as FormArray).controls
-      .filter(reason => reason.value.selected === true);
-    reasonChosen.forEach(element => {
+      .filter((reason) => reason.value.selected === true);
+    reasonChosen.forEach((element) => {
       mappedReason.push({
         key: element.value.key,
         value_en: element.value.value_en,
@@ -118,7 +118,7 @@ export class CancelHearingComponent implements OnInit {
         hint_text_en: element.value.hint_text_en,
         hint_text_cy: element.value.hint_text_cy,
         lov_order: element.value.lov_order,
-        parent_key: element.value.parent_key,
+        parent_key: element.value.parent_key
       } as LovRefDataModel);
     });
     return mappedReason;

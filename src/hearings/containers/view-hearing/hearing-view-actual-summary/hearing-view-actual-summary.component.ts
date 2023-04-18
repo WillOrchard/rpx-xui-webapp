@@ -9,7 +9,7 @@ import * as fromHearingStore from '../../../store';
 
 @Component({
   selector: 'exui-hearing-view-actual-summary',
-  templateUrl: './hearing-view-actual-summary.component.html',
+  templateUrl: './hearing-view-actual-summary.component.html'
 })
 export class HearingViewActualSummaryComponent implements OnInit, OnDestroy {
   public hearingActualsMainModel: HearingActualsMainModel;
@@ -17,8 +17,7 @@ export class HearingViewActualSummaryComponent implements OnInit, OnDestroy {
   public showSpinner$: Observable<boolean>;
 
   constructor(private readonly hearingStore: Store<fromHearingStore.State>,
-    private readonly loadingService: LoadingService) {
-  }
+    private readonly loadingService: LoadingService) {}
 
   public ngOnInit(): void {
     this.showSpinner$ = this.loadingService.isLoading as any;

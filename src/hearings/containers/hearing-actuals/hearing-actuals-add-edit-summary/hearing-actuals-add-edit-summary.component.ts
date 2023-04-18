@@ -43,7 +43,7 @@ export class HearingActualsAddEditSummaryComponent extends HearingActualsSummary
     );
     this.hearingStore.dispatch(new fromHearingStore.UpdateHearingActuals({
       hearingId: this.id,
-      hearingActuals: patchedHearingActuals,
+      hearingActuals: patchedHearingActuals
     }));
   }
 
@@ -79,7 +79,7 @@ export class HearingActualsAddEditSummaryComponent extends HearingActualsSummary
     );
     this.hearingStore.dispatch(new fromHearingStore.UpdateHearingActuals({
       hearingId: this.id,
-      hearingActuals: patchedHearingActuals,
+      hearingActuals: patchedHearingActuals
     }));
     this.showSuccessBannerMessage();
   }
